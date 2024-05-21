@@ -2,7 +2,6 @@
 	"name": "cgs-team-camp-template-2024",
 	"version": "1.0.0",
 	"description": "",
-	"private": "true",
 	"workspaces": [
 		"packages/*"
 	],
