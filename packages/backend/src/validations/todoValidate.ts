@@ -5,13 +5,17 @@ export const todosValidation = [
 		.isLength({ min: 2 })
 		.withMessage('Title must be at least 2 characters long'),
 	body('completed').isBoolean().withMessage('Completed must be a boolean'),
+	body('description')
+		.optional()
+		.isLength({ min: 4 })
+		.withMessage('description must be at least 4 characters long'),
 ];
 
 export const todosPatchValidation = [
 	check().custom((_, { req }) => {
-		if (!req.body.title && !req.body.completed) {
+		if (!req.body.title && !req.body.completed && req.body.description) {
 			throw new Error(
-				'At least one of "title" or "completed" must be provided',
+				'At least one of "title" or "completed" or "description" must be provided',
 			);
 		}
 		return true;
@@ -24,4 +28,9 @@ export const todosPatchValidation = [
 		.optional()
 		.isBoolean()
 		.withMessage('Completed must be a boolean'),
+
+	body('description')
+		.optional()
+		.isLength({ min: 4 })
+		.withMessage('description must be at least 4 characters long'),
 ];

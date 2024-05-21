@@ -13,11 +13,13 @@ export default class TodoService {
 	async createOne({
 		title,
 		completed,
+		description = '',
 	}: Omit<TodoType, 'id'>): Promise<TodoType> {
 		const newTodo = await prisma.todos.create({
 			data: {
 				title: title,
 				completed: completed || false,
+				description,
 			},
 		});
 

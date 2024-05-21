@@ -11,9 +11,13 @@ export class TodoController {
 	}
 
 	async createTodo(req: Request, resp: Response): Promise<void> {
-		const { title, completed } = req.body;
+		const { title, completed, description } = req.body;
 
-		const todo = await this.todoService.createOne({ title, completed });
+		const todo = await this.todoService.createOne({
+			title,
+			completed,
+			description,
+		});
 
 		resp.status(201).send(todo);
 	}
