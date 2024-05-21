@@ -15,8 +15,6 @@ export class TodoController {
 
 		const todo = await this.todoService.createOne({ title, completed });
 
-		console.log(todo);
-
 		resp.status(201).send(todo);
 	}
 

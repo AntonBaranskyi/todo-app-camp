@@ -21,8 +21,6 @@ export default class TodoService {
 			},
 		});
 
-		console.log(newTodo);
-
 		return newTodo;
 	}
 
