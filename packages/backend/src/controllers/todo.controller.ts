@@ -25,7 +25,7 @@ export class TodoController {
 
 		const deleted = await this.todoService.deleteOne(Number(id));
 
-		resp.status(200).json(deleted);
+		resp.status(200).json({ message: deleted });
 	}
 
 	async updateTodo(req: Request, resp: Response): Promise<void> {
