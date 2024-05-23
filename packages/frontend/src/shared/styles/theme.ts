@@ -77,7 +77,8 @@ export const theme = Object.freeze({
 	},
 
 	breakpoints: {
-		tablet: '600px',
+		smallTablet: '600px',
+		tablet: '710px',
 		smallDekstop: '900px',
 		dekstop: '1280px',
 	},

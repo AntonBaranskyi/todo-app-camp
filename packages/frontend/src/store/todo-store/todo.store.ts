@@ -45,4 +45,8 @@ export const useTodoStore = create<ITodosState>((set) => ({
 	setEditingTodo: (todo: ITodo): void => {
 		set({ editingTodo: todo });
 	},
+
+	clearEditingTodo: (): void => {
+		set({ editingTodo: null });
+	},
 }));

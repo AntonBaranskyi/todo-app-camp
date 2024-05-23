@@ -13,9 +13,16 @@ import { ITodo } from '~store/todo-store/todo.store.types';
 import { useCommonStore } from '~store/common-store/common.store';
 
 export const CreateModal = (): React.ReactNode => {
-	const { createOneTodo, addTodoLoading, editingTodo, updateOneTodo } =
-		useTodoStore((state) => state);
-	const { toggleModalOpen, isEditing } = useCommonStore((state) => state);
+	const {
+		createOneTodo,
+		addTodoLoading,
+		editingTodo,
+		updateOneTodo,
+		clearEditingTodo,
+	} = useTodoStore((state) => state);
+	const { toggleModalOpen, isEditing, toggleEdditing } = useCommonStore(
+		(state) => state,
+	);
 
 	const {
 		register,
@@ -26,7 +33,7 @@ export const CreateModal = (): React.ReactNode => {
 		defaultValues: {
 			title: editingTodo?.title,
 			description: editingTodo?.description,
-			completed: editingTodo?.completed,
+			completed: editingTodo?.completed || false,
 		},
 		mode: 'onBlur',
 	});
@@ -43,6 +50,8 @@ export const CreateModal = (): React.ReactNode => {
 		if (isEditing) {
 			updateOneTodo({ id: editingTodo.id, data: todoData });
 			toggleModalOpen();
+			toggleEdditing(false);
+			clearEditingTodo();
 
 			return;
 		}

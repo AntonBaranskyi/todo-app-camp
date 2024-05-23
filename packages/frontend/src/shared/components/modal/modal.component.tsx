@@ -1,6 +1,7 @@
 import { Dialog } from '@blueprintjs/core';
 import React from 'react';
 import { useCommonStore } from '~store/common-store/common.store';
+import { modalStyles } from './modal.styles';
 
 type Props = {
 	children: React.ReactNode;
@@ -20,7 +21,12 @@ export const Modal: React.FC<Props> = ({
 	};
 
 	return (
-		<Dialog isOpen={isOpen} title="Todo APP" onClose={handleCloseModal}>
+		<Dialog
+			isOpen={isOpen}
+			title="Todo APP"
+			onClose={handleCloseModal}
+			className={modalStyles}
+		>
 			{children}
 		</Dialog>
 	);

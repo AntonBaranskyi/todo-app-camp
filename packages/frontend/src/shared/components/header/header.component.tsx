@@ -6,15 +6,18 @@ import {
 	headerWrapper,
 } from './header.component.styles';
 import Button from '../button/button.component';
+import { Link } from 'react-router-dom';
 
 export const Header = (): React.ReactNode => {
 	return (
 		<header className={headerStyles}>
 			<GlobalContainer>
 				<div className={headerWrapper}>
-					<h2 className={headerTitle}>
-						Todo <span>App</span>
-					</h2>
+					<Link to="/">
+						<h2 className={headerTitle}>
+							Todo <span>App</span>
+						</h2>
+					</Link>
 
 					<Button text="My Profile" />
 				</div>

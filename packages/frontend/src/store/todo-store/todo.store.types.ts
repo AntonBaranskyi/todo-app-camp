@@ -16,4 +16,5 @@ export interface ITodosState {
 	editingTodo: ITodo;
 
 	setEditingTodo: (todo: ITodo) => void;
+	clearEditingTodo: () => void;
 }

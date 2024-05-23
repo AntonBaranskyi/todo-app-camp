@@ -3,7 +3,7 @@ import { theme } from '~shared/styles';
 
 export const layoutContainer = css`
 	padding-inline: ${theme.spaces.s};
-	@media (min-width: ${theme.breakpoints.tablet}) {
+	@media (min-width: ${theme.breakpoints.smallTablet}) {
 		padding-inline: ${theme.spaces.sm};
 	}
 

@@ -1,11 +1,12 @@
 import React from 'react';
-import { ITodo } from '~store/todo-store/todo.store.types';
 import {
-	actionsWrapper,
-	actionWrapper,
+	bottomWrapper,
+	buttonsWrapper,
+	sliderItem,
 	switchStyle,
-	titleWrapper,
-} from './todo-row.styles';
+	todoTitle,
+} from './todo-slide-item.style';
+import { ITodo } from '~store/todo-store/todo.store.types';
 import { Button, Switch } from '@blueprintjs/core';
 import { useTodoActions } from '~modules/todos/hooks/useTodoActions';
 
@@ -13,7 +14,7 @@ type Props = {
 	todo: ITodo;
 };
 
-export const TodoRaw: React.FC<Props> = ({ todo }): React.ReactNode => {
+export const TodoSlideItem: React.FC<Props> = ({ todo }): React.ReactNode => {
 	const {
 		handleDeleteTodo,
 		handleEditOpen,
@@ -37,21 +38,26 @@ export const TodoRaw: React.FC<Props> = ({ todo }): React.ReactNode => {
 	};
 
 	return (
-		<tr>
-			<td className={titleWrapper}>{todo.title}</td>
-			<td>{todo.description}</td>
-			<td className={actionWrapper}>
-				<div className={actionsWrapper}>
-					<Button text="View" onClick={onHandleNavigate} />
-					<Button text="Edit" onClick={onHandleEditOpen} />
-					<Button text="Delete" onClick={onHandleDeleteTodo} />
+		<div className={sliderItem}>
+			<div>
+				<h2 className={todoTitle}>{todo.title}</h2>
+
+				<p>{todo.description}</p>
+			</div>
+			<div>
+				<div className={bottomWrapper}>
+					<div className={buttonsWrapper}>
+						<Button text="View" onClick={onHandleNavigate} />
+						<Button text="Edit" onClick={onHandleEditOpen} />
+						<Button text="Delete" onClick={onHandleDeleteTodo} />
+					</div>
 					<Switch
 						className={switchStyle}
 						checked={todo.completed}
 						onChange={onHandleChangeStatus}
 					/>
 				</div>
-			</td>
-		</tr>
+			</div>
+		</div>
 	);
 };

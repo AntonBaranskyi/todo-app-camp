@@ -11,6 +11,10 @@ import { Button } from '@blueprintjs/core';
 import { Modal } from '~shared/components/modal';
 import { CreateModal } from '~modules/todos/components/todo-create-modal';
 import { useCommonStore } from '~store/common-store/common.store';
+import { useMediaQuery } from 'react-responsive';
+import { theme } from '~shared/styles';
+import { TodoSlider } from '~modules/todos/components/todo-slider';
+import { TodoList } from '~modules/todos/components/todos-list';
 
 export const TodoHomePage = (): React.ReactNode => {
 	const { todos, getAllTodo, isLoading, addTodoLoading } = useTodoStore(
@@ -20,7 +24,13 @@ export const TodoHomePage = (): React.ReactNode => {
 		(state) => state,
 	);
 
-	console.dir(todos);
+	const isTablet = useMediaQuery({
+		query: `(min-width:${theme.breakpoints.smallTablet})`,
+	});
+
+	const isDekstop = useMediaQuery({
+		query: `(min-width:${theme.breakpoints.smallDekstop})`,
+	});
 
 	useEffect(() => {
 		getAllTodo();
@@ -32,14 +42,19 @@ export const TodoHomePage = (): React.ReactNode => {
 			<GlobalContainer>
 				<div className={filtersWrapper}>
 					<TodosFilter />
+
 					<Button text="Create Todo" onClick={toggleModalOpen} />
 					<Input type="search" placeholder="Find a todo" />
 				</div>
 
 				{isLoading || addTodoLoading ? (
 					<Loader />
-				) : (
+				) : isDekstop ? (
 					<TodoTable todos={todos} />
+				) : isTablet ? (
+					<TodoSlider todos={todos} />
+				) : (
+					<TodoList todos={todos} />
 				)}
 			</GlobalContainer>
 			<Modal isOpen={addTodoModalOpen}>
