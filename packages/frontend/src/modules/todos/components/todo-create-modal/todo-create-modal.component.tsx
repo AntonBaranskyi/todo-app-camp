@@ -61,8 +61,6 @@ export const CreateModal = (): React.ReactNode => {
 	};
 	const formRef = useRef<HTMLFormElement>(null);
 
-	console.log(editingTodo);
-
 	const handleFormSubmit = handleSubmit(onHandleSubmit);
 
 	return (
@@ -148,7 +146,7 @@ export const CreateModal = (): React.ReactNode => {
 						/>
 					</>
 				}
-			></DialogFooter>
+			/>
 		</>
 	);
 };

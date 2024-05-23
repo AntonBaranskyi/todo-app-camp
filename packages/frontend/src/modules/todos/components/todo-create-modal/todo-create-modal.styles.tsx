@@ -4,20 +4,19 @@ import { theme } from '~shared/styles';
 export const modalTodo = css``;
 
 export const createSection = css`
-	margin-bottom: 12px;
+	margin-bottom: ${theme.spaces.xs};
 `;
 
 export const createInput = css`
 	width: 100%;
-	padding-block: 12px;
-	padding-inline: 10px;
+	padding: ${theme.spaces.xs};
 	border: 1px solid ${theme.colors.dimGray};
 `;
 
 export const switchWrapper = css`
 	display: flex;
 
-	gap: 5px;
+	gap: ${theme.spaces.xxs};
 
 	justify-content: center;
 `;

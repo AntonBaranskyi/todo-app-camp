@@ -68,10 +68,12 @@ export const theme = Object.freeze({
 	spaces: {
 		xxs: '5px',
 		xs: '10px',
+		xms: '15px',
 		s: '20px',
 		sm: '25px',
 		m: '30px',
 		lg: '35px',
+		lgm: '50px',
 		xl: '80px',
 		xxl: '100px',
 	},

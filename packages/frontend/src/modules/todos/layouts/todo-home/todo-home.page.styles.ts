@@ -8,9 +8,9 @@ export const filtersWrapper = css`
 
 	flex-direction: column;
 
-	gap: 10px;
+	gap: ${theme.spaces.xs};
 
-	margin-bottom: 30px;
+	margin-bottom: ${theme.spaces.m};
 
 	@media (min-width: ${theme.breakpoints.smallTablet}) {
 		flex-direction: row;
