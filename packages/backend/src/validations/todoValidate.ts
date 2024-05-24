@@ -6,9 +6,16 @@ export const todosValidation = [
 		.withMessage('Title must be at least 2 characters long'),
 	body('completed').isBoolean().withMessage('Completed must be a boolean'),
 	body('description')
-		.optional()
-		.isLength({ min: 4 })
-		.withMessage('description must be at least 4 characters long'),
+		.custom((value) => {
+			if (value === '') {
+				return true;
+			}
+			if (value && value.length >= 4) {
+				return true;
+			}
+			throw new Error('Description must be at least 4 characters long');
+		})
+		.optional(),
 ];
 
 export const todosPatchValidation = [
