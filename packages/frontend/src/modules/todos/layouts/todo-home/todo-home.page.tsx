@@ -36,6 +36,10 @@ export const TodoHomePage = (): React.ReactNode => {
 		getAllTodo();
 	}, []);
 
+	if (isLoading || addTodoLoading) {
+		return <Loader />;
+	}
+
 	return (
 		<>
 			<Header />
@@ -47,15 +51,9 @@ export const TodoHomePage = (): React.ReactNode => {
 					<Input type="search" placeholder="Find a todo" />
 				</div>
 
-				{isLoading || addTodoLoading ? (
-					<Loader />
-				) : isDekstop ? (
-					<TodoTable todos={todos} />
-				) : isTablet ? (
-					<TodoSlider todos={todos} />
-				) : (
-					<TodoList todos={todos} />
-				)}
+				{isDekstop && <TodoTable todos={todos} />}
+				{isTablet && <TodoSlider todos={todos} />}
+				{!isDekstop && !isTablet && <TodoList todos={todos} />}
 			</GlobalContainer>
 			<Modal isOpen={addTodoModalOpen}>
 				<CreateModal />

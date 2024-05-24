@@ -1,8 +1,6 @@
 import { css } from '@emotion/css';
 import { theme } from '~shared/styles';
 
-export const modalTodo = css``;
-
 export const createSection = css`
 	margin-bottom: ${theme.spaces.xs};
 `;

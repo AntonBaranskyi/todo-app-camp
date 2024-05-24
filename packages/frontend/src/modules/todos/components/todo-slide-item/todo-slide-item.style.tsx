@@ -12,7 +12,7 @@ export const sliderItem = css`
 	width: 250px;
 	height: 180px;
 
-	border: 1px solid gray;
+	border: 1px solid ${theme.colors.dimGray};
 
 	@media (min-width: ${theme.breakpoints.tablet}) {
 		width: 300px;
