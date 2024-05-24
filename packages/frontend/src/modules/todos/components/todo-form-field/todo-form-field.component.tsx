@@ -33,10 +33,10 @@ export const TodoFormField: React.FC<FormFieldProps> = ({
 				placeholder={placeholder}
 				className={createInput}
 				{...register(name, {
-					required: `The ${label.toLowerCase()} is required`,
+					required: `The ${name} is required`,
 					minLength: {
 						value: 2,
-						message: `${label} must be at least 2 characters long`,
+						message: `${name} must be at least 2 characters long`,
 					},
 				})}
 			/>
