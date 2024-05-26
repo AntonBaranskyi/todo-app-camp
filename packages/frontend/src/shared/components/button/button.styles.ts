@@ -1,16 +1,16 @@
 import { css } from '@emotion/css';
-import { colors } from '../../styles';
+
+import { theme } from '../../styles';
 
 export const btnStyles = (disabled: boolean): string => {
 	return css`
-		width: 100%;
-		padding: 17px 0;
+		padding: 17px 15px;
 		font-size: 20px;
 		font-weight: 700;
-		color: ${disabled ? colors.imperial : colors.white};
+		color: ${disabled ? theme.colors.imperial : theme.colors.white};
 		background-color: ${disabled
-			? colors.americanPurple
-			: colors.mediumVioletRed};
+			? theme.colors.americanPurple
+			: theme.colors.mediumVioletRed};
 		border: none;
 		border-radius: 28px;
 		box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.06);
