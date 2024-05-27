@@ -1,11 +1,16 @@
+import { prisma } from '@/app';
 import { TodoType } from '@/types/todos.type';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
 
 export default class TodoService {
-	async findAll(): Promise<TodoType[]> {
-		const todos = await prisma.todos.findMany();
+	async findAll(userId: number | null): Promise<TodoType[]> {
+		const todos = await prisma.todos.findMany({
+			where: {
+				OR: [
+					{ isPrivate: false },
+					...(userId ? [{ userId: userId }] : []),
+				],
+			},
+		});
 
 		return todos;
 	}
@@ -14,12 +19,16 @@ export default class TodoService {
 		title,
 		completed,
 		description = '',
+		isPrivate,
+		userId,
 	}: Omit<TodoType, 'id'>): Promise<TodoType> {
 		const newTodo = await prisma.todos.create({
 			data: {
 				title: title,
 				completed: completed || false,
 				description,
+				isPrivate,
+				userId,
 			},
 		});
 

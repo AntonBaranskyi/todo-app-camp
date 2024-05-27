@@ -1,9 +1,9 @@
+import { prisma } from '@/app';
+import HttpError from '@/helpers/HttpError';
 import { MODELS } from '@/types/models.enum';
-import { PrismaClient } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
 import { ValidationChain, validationResult } from 'express-validator';
-
-const prisma = new PrismaClient();
+import passport from '@/middlewares/auth.middleware';
 
 export const validateRequest = (validations: ValidationChain[]) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
@@ -27,15 +27,24 @@ export const isExist = (model: MODELS) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const { id } = req.params;
+			const { email } = req.body;
 
-			const instance = await prisma[model].findUnique({
-				where: { id: Number(id) },
-			});
+			let instance = null;
+
+			if (email) {
+				instance = await prisma[model].findUnique({
+					where: { email },
+				});
+			}
+
+			if (id && !instance) {
+				instance = await prisma[model].findUnique({
+					where: { id: Number(id) },
+				});
+			}
 
 			if (!instance) {
-				return res
-					.status(404)
-					.json({ error: `Instance with id ${id} not found` });
+				return res.status(404).json({ error: 'Instance not found' });
 			}
 
 			next();
@@ -52,3 +61,19 @@ export const tryCatch = (
 		fn(req, res, next).catch(next);
 	};
 };
+
+export const optionalAuthenticateJwt = (
+	req: Request,
+	res: Response,
+	next: NextFunction,
+): void => {
+	passport.authenticate('jwt', { session: false }, (err, user) => {
+		if (user) {
+			req.body.user = user;
+		}
+
+		next();
+	})(req, res, next);
+};
+
+export const authenticateJwt = passport.authenticate('jwt', { session: false });
