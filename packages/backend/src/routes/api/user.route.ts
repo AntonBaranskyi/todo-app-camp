@@ -45,4 +45,9 @@ router.patch(
 	tryCatch(userController.updatePassword.bind(userController)),
 );
 
+router.get(
+	'activate-account',
+	tryCatch(userController.verifyEmail.bind(userController)),
+);
+
 export default router;

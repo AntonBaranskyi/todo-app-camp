@@ -1,5 +1,4 @@
 import { prisma } from '@/app';
-import HttpError from '@/helpers/HttpError';
 import { MODELS } from '@/types/models.enum';
 import { Request, Response, NextFunction } from 'express';
 import { ValidationChain, validationResult } from 'express-validator';
