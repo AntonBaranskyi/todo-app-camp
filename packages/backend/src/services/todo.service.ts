@@ -1,15 +1,25 @@
 import { prisma } from '@/app';
+import { buildSearchConditions } from '@/helpers/buildSearchConditions';
+import { IFindAll } from '@/types/service.types';
 import { TodoType } from '@/types/todos.type';
 
 export default class TodoService {
-	async findAll(userId: number | null): Promise<TodoType[]> {
+	async findAll({
+		userId = null,
+		search,
+		status,
+		sortOrder,
+	}: IFindAll): Promise<TodoType[]> {
+		const { where, orderBy } = buildSearchConditions({
+			userId,
+			search,
+			status,
+			sortOrder,
+		});
+
 		const todos = await prisma.todos.findMany({
-			where: {
-				OR: [
-					{ isPrivate: false },
-					...(userId ? [{ userId: userId }] : []),
-				],
-			},
+			where,
+			orderBy,
 		});
 
 		return todos;

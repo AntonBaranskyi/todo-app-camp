@@ -7,8 +7,14 @@ export class TodoController {
 
 	async getAllTodo(req: Request, res: Response): Promise<void> {
 		const userId = req?.body?.user?.id ?? null;
+		const { search, order, status } = req.query;
 
-		const todos = await this.todoService.findAll(userId);
+		const todos = await this.todoService.findAll({
+			userId,
+			search,
+			status,
+			sortOrder: order,
+		});
 		res.send(todos);
 	}
 
