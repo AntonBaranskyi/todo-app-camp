@@ -4,7 +4,7 @@ import { Popover } from '@blueprintjs/core';
 
 type Props = {
 	placement: 'bottom' | 'top';
-	content: any;
+	content: string | JSX.Element;
 	isOpen: boolean;
 	children: React.ReactNode;
 	changeFunc: (isOpen: boolean) => void;
