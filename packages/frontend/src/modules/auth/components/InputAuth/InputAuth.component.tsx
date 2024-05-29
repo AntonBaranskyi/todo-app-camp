@@ -9,7 +9,6 @@ import { Input } from '~shared/components/input';
 import { FieldErrors, UseFormRegister, Path } from 'react-hook-form';
 import { VALIDATIONS } from '~modules/auth/constants/valudationRules';
 
-// Define the prop types
 type Props<T> = {
 	label: string;
 	placeholder: string;
@@ -18,7 +17,6 @@ type Props<T> = {
 	register: UseFormRegister<T>;
 };
 
-// Make the component generic
 export const InputAuth = <T,>({
 	label,
 	placeholder,

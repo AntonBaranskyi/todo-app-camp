@@ -1,23 +1,24 @@
 import { css } from '@emotion/css';
+import { theme } from '~shared/styles';
 
 export const popoverBodyWrapper = css`
-	padding: 8px;
-	background-color: #ffffff;
+	padding: ${theme.spaces.xs};
+	background-color: ${theme.colors.white};
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-	border-radius: 4px;
+	border-radius: ${theme.spaces.xxs};
 	min-width: 200px;
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: ${theme.spaces.xs};
 `;
 
 export const popoverMenuItem = css`
-	padding: 8px 12px;
+	padding: ${theme.spaces.xxs} ${theme.spaces.xs};
 	cursor: pointer;
-	border-radius: 4px;
+	border-radius: ${theme.spaces.xxs};
 	transition: background-color 0.2s;
 
 	&:hover {
-		background-color: #f0f0f0;
+		background-color: ${theme.colors.dimGray};
 	}
 `;

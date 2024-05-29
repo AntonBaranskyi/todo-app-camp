@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputAuth } from '../common/InputAuth';
+import { InputAuth } from '../InputAuth';
 import { useForm } from 'react-hook-form';
 import { Button } from '@blueprintjs/core';
 import { buttonWrapper } from './forgot-password.styles';

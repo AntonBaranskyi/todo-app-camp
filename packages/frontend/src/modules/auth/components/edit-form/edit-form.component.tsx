@@ -2,7 +2,7 @@
 
 import React, { forwardRef } from 'react';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import { InputAuth } from '../common/InputAuth';
+import { InputAuth } from '../InputAuth';
 import { editUserWrapper } from './edit-form.styles';
 
 interface EditUserFormProps {

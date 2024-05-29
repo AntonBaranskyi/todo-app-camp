@@ -5,7 +5,7 @@ import {
 	submitButton,
 	wrapperDont,
 } from './authForm.styles';
-import { InputAuth } from '../common/InputAuth';
+import { InputAuth } from '../InputAuth';
 import { Link, Navigate } from 'react-router-dom';
 import { Button } from '@blueprintjs/core';
 import { AUTH_TYPE } from '~shared/types/authEnum';
