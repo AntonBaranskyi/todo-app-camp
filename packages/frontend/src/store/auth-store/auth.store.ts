@@ -14,6 +14,8 @@ export const useAuthStore = create<IAuthState>((set) => ({
 
 			localStorage.setItem('token', user.token);
 
+			toaster.show({ message: 'Succesfully registred' });
+
 			set({ user });
 		} catch (error) {
 			toaster.show({ message: 'Failed to sign up. Please try again.' });
@@ -25,6 +27,8 @@ export const useAuthStore = create<IAuthState>((set) => ({
 			const user = await authService.loginUser(data);
 			localStorage.setItem('token', user.token);
 			set({ user, isAuth: true });
+
+			toaster.show({ message: 'Succesfully logged in' });
 		} catch (error) {
 			toaster.show({ message: 'Failed to log in. Please try again.' });
 		}
