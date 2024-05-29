@@ -14,6 +14,7 @@ import { IUserLogin } from '~store/auth-store/auth.store.types';
 import { useAuthStore } from '~store/auth-store/auth.store';
 import { useCommonStore } from '~store/common-store/common.store';
 import { DEFAULT_VALUES } from '~modules/auth/constants/defaultValues';
+import { ROUTER_KEYS } from '~shared/keys';
 
 type Props = {
 	type: AUTH_TYPE;
@@ -49,7 +50,7 @@ export const AuthForm: React.FC<Props> = ({ type }): React.ReactNode => {
 	};
 
 	if (isAuth) {
-		return <Navigate to="/" />;
+		return <Navigate to={ROUTER_KEYS.ALL_MATCH} />;
 	}
 
 	return (

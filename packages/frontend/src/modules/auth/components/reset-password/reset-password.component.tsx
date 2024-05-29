@@ -6,6 +6,7 @@ import { Button } from '@blueprintjs/core';
 import { resetButton } from './reset-password.styles';
 import { useAuthStore } from '~store/auth-store/auth.store';
 import { DEFAULT_VALUES } from '~modules/auth/constants/defaultValues';
+import { ROUTER_KEYS } from '~shared/keys';
 
 export const ResetPassword = (): React.ReactNode => {
 	const { userToken } = useParams();
@@ -24,7 +25,7 @@ export const ResetPassword = (): React.ReactNode => {
 	const onHandleSubmit = (data: { password: string }): void => {
 		localStorage.setItem('token', userToken);
 		updatePassword(data.password);
-		navigate('/');
+		navigate(ROUTER_KEYS.ALL_MATCH);
 	};
 
 	const formRef = useRef<HTMLFormElement>(null);

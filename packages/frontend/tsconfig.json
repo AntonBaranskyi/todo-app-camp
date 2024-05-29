@@ -45,6 +45,12 @@
 			],
 			"~popover-body/*": [
 				"src/shared/popover-body/*"
+			],
+			"~types/*": [
+				"src/shared/types/*"
+			],
+			"~auth-store/*": [
+				"src/store/auth-store/*"
 			]
 		}
 	},

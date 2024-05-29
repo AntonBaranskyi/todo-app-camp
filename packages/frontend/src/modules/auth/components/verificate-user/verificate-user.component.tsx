@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { ROUTER_KEYS } from '~shared/keys';
 
 import { useAuthStore } from '~store/auth-store/auth.store';
 
@@ -11,7 +12,7 @@ export const VerificateUser = (): React.ReactNode => {
 
 	useEffect(() => {
 		verifyUser(token);
-		navigate('/');
+		navigate(ROUTER_KEYS.ALL_MATCH);
 	}, []);
 
 	return <div></div>;
