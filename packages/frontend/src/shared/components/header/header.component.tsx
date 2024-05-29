@@ -10,6 +10,7 @@ import { useAuthStore } from '~store/auth-store/auth.store';
 import { Button } from '@blueprintjs/core';
 import { PopoverItem } from '../popover-item';
 import { PopoverBody } from '../popover-body';
+import { ROUTER_KEYS } from '~shared/keys';
 
 export const Header = (): React.ReactNode => {
 	const isAuth = useAuthStore((state) => state.isAuth);
@@ -24,7 +25,7 @@ export const Header = (): React.ReactNode => {
 		<header className={headerStyles}>
 			<GlobalContainer>
 				<div className={headerWrapper}>
-					<Link to="/">
+					<Link to={ROUTER_KEYS.ALL_MATCH}>
 						<h2 className={headerTitle}>
 							Todo <span>App</span>
 						</h2>
@@ -40,7 +41,7 @@ export const Header = (): React.ReactNode => {
 							<Button text="My Profile" intent="primary" large />
 						</PopoverItem>
 					) : (
-						<Link to="/auth/login">
+						<Link to={`/${ROUTER_KEYS.AUTH}/${ROUTER_KEYS.LOGIN}`}>
 							<Button text="Login" intent="primary" large />
 						</Link>
 					)}

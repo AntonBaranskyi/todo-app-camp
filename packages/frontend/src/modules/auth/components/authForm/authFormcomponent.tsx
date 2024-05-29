@@ -74,7 +74,9 @@ export const AuthForm: React.FC<Props> = ({ type }): React.ReactNode => {
 
 			{isLogin && (
 				<div className={forgotWrapper}>
-					<Link to="/auth/forgot">Forgot password?</Link>
+					<Link to={`/${ROUTER_KEYS.AUTH}/${ROUTER_KEYS.FORGOT}`}>
+						Forgot password?
+					</Link>
 				</div>
 			)}
 
@@ -90,10 +92,16 @@ export const AuthForm: React.FC<Props> = ({ type }): React.ReactNode => {
 				{isLogin ? (
 					<>
 						<p>Don't have account? </p>
-						<Link to="/auth/register">Sign Up</Link>
+						<Link
+							to={`/${ROUTER_KEYS.AUTH}/${ROUTER_KEYS.REGISTER}`}
+						>
+							Sign Up
+						</Link>
 					</>
 				) : (
-					<Link to="/auth/login">Back to login</Link>
+					<Link to={`/${ROUTER_KEYS.AUTH}/${ROUTER_KEYS.LOGIN}`}>
+						Back to login
+					</Link>
 				)}
 			</div>
 		</form>
