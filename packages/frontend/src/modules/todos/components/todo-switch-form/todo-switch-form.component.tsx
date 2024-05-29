@@ -2,16 +2,11 @@ import React from 'react';
 import { Controller, Control } from 'react-hook-form';
 import { Switch } from '@blueprintjs/core';
 import { switchWrapper } from './todo-switch-form.styles';
+import { PublicTodo, TodoName } from '~modules/todos/types/todo-form.types';
 
 type CompletedSwitchProps = {
-	name: 'title' | 'description' | 'completed' | 'isPrivate';
-	control: Control<{
-		title: string;
-		description: string;
-		completed: boolean;
-
-		isPrivate: boolean;
-	}>;
+	name: TodoName;
+	control: Control<PublicTodo>;
 	label: string;
 };
 
