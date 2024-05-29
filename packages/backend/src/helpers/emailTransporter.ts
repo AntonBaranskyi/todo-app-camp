@@ -22,14 +22,14 @@ const emailSendOption = {
 		subject: 'Confirm your new account',
 		html: (token: string): string => `
 		<h3>Please click a link below to confirm your registation</h3>
-		<p>${process.env.CLIENT_URL}/verificate/${token}</p>`,
+		<p>${process.env.CLIENT_URL}/auth/verificate/${token}/</p>`,
 	},
 
 	forgot_password: {
 		subject: 'Reset password. Anton Baranskyi web-site',
 		html: (token: string): string => `
 		<h3>Please click a link below to reset your password</h3>
-		<p>${process.env.CLIENT_URL}/auth/reset-password/${token}</p>`,
+		<p>${process.env.CLIENT_URL}/auth/reset-password/${token}/</p>`,
 	},
 };
 

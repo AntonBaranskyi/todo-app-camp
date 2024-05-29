@@ -38,6 +38,7 @@ export const theme = Object.freeze({
 		iris: '#623ECC',
 		brilliantLavender: '#FABAF0',
 		error: '#ff3333',
+		inputColor: '#e0e0e0',
 	},
 	fonts: {
 		name: 'Mont, sans-serif',

@@ -2,11 +2,14 @@ import React from 'react';
 import { createInput, createSection } from './todo-form-field.styles';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { Input } from '~shared/components/input';
+import { VALIDATION_TODO } from '~modules/todos/constants/validationRules';
 
 type FormValues = {
 	title: string;
 	description: string;
 	completed: boolean;
+
+	isPrivate: boolean;
 };
 
 type FormFieldProps = {
@@ -32,13 +35,7 @@ export const TodoFormField: React.FC<FormFieldProps> = ({
 			<Input
 				placeholder={placeholder}
 				className={createInput}
-				{...register(name, {
-					required: `The ${name} is required`,
-					minLength: {
-						value: 2,
-						message: `${name} must be at least 2 characters long`,
-					},
-				})}
+				{...register(name, VALIDATION_TODO[name])}
 			/>
 			{errors[name] && (
 				<span className={errorMessage}>{errors[name].message}</span>

@@ -32,7 +32,7 @@ export const useTodoActions = (): TodoActions => {
 
 	const handleEditOpen = (todo: ITodo): void => {
 		toggleEdditing(true);
-		toggleModalOpen();
+		toggleModalOpen(true);
 
 		setEditingTodo(todo);
 	};
