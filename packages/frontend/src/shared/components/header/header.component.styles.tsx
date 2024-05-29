@@ -6,8 +6,6 @@ export const headerStyles = css`
 	padding-block: ${theme.spaces.xs};
 
 	background-color: ${theme.colors.japaneseIndigo};
-
-	margin-bottom: ${theme.spaces.xl};
 `;
 
 export const headerWrapper = css`

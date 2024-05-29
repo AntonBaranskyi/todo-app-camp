@@ -12,12 +12,20 @@ export const Modal: React.FC<Props> = ({
 	children,
 	isOpen = false,
 }): React.ReactNode => {
-	const { toggleModalOpen, toggleEdditing } = useCommonStore(
-		(state) => state,
-	);
+	const {
+		toggleModalOpen,
+		toggleEdditing,
+		toggleForgetModal,
+		toggleEditUser,
+		toggleVerificateUser,
+	} = useCommonStore((state) => state);
+
 	const handleCloseModal = (): void => {
 		toggleEdditing(false);
-		toggleModalOpen();
+		toggleModalOpen(false);
+		toggleForgetModal({ bool: false, email: '' });
+		toggleEditUser(false);
+		toggleVerificateUser(false);
 	};
 
 	return (

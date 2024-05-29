@@ -10,6 +10,7 @@ import {
 } from './todo-detail.styles';
 import { Button, Switch } from '@blueprintjs/core';
 import { useNavigate } from 'react-router-dom';
+import { ROUTER_KEYS } from '~shared/keys';
 
 export const TodoDetailPage = (): React.ReactNode => {
 	const { currentTodo, handleChangeStatus } = useTodoActions();
@@ -17,7 +18,7 @@ export const TodoDetailPage = (): React.ReactNode => {
 	const navigate = useNavigate();
 
 	const handleNavigate = (): void => {
-		navigate('/');
+		navigate(ROUTER_KEYS.ALL_MATCH);
 	};
 
 	const onHandleChangeStatus = (): void => {

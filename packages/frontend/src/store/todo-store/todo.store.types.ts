@@ -3,6 +3,9 @@ export interface ITodo {
 	title: string;
 	description: string;
 	completed: boolean;
+
+	isPrivate: boolean;
+	userId?: number | null;
 }
 
 export interface ITodosState {

@@ -4,11 +4,14 @@ import { useTodoStore } from '~store/todo-store/todo.store';
 import { useCommonStore } from '~store/common-store/common.store';
 import { TodoDialogBody } from '../todo-dialog-body';
 import { ITodo } from '~store/todo-store/todo.store.types';
+import { useAuthStore } from '~store/auth-store/auth.store';
 
 export const CreateModal = (): React.ReactNode => {
 	const { toggleModalOpen, isEditing, toggleEdditing } = useCommonStore(
 		(state) => state,
 	);
+
+	const user = useAuthStore((state) => state.user);
 	const {
 		addTodoLoading,
 		editingTodo,
@@ -21,24 +24,26 @@ export const CreateModal = (): React.ReactNode => {
 	const formRef = useRef<HTMLFormElement>(null);
 
 	const handleFormSubmit = (data: ITodo): void => {
-		const { title, completed, description } = data;
+		const { title, completed, description, isPrivate } = data;
 
 		const todoData: Partial<ITodo> = {
 			title,
 			completed,
 			description: description ?? '',
+			isPrivate,
+			userId: user?.id || null,
 		};
 
 		if (isEditing) {
 			updateOneTodo({ id: editingTodo.id, data: todoData });
-			toggleModalOpen();
+			toggleModalOpen(false);
 			toggleEdditing(false);
 			clearEditingTodo();
 			return;
 		}
 
 		createOneTodo(todoData as ITodo);
-		toggleModalOpen();
+		toggleModalOpen(false);
 	};
 
 	const handleSubmitClick = (): void => {
@@ -47,6 +52,10 @@ export const CreateModal = (): React.ReactNode => {
 				new Event('submit', { cancelable: true, bubbles: true }),
 			);
 		}
+	};
+
+	const handleModalClose = (): void => {
+		toggleModalOpen(false);
 	};
 
 	return (
@@ -63,7 +72,7 @@ export const CreateModal = (): React.ReactNode => {
 						<Button
 							intent="none"
 							text="Close"
-							onClick={toggleModalOpen}
+							onClick={handleModalClose}
 						/>
 						<Button
 							intent="primary"
