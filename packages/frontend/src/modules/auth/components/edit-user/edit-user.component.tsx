@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useCommonStore } from '~store/common-store/common.store';
 import { EditForm } from '../edit-form';
 import { useAuthStore } from '~store/auth-store/auth.store';
+import { DEFAULT_VALUES } from '~modules/auth/constants/defaultValues';
 
 export const EditUser = (): React.ReactNode => {
 	const toggleEditUser = useCommonStore((state) => state.toggleEditUser);
@@ -17,7 +18,7 @@ export const EditUser = (): React.ReactNode => {
 		formState: { errors, isValid },
 	} = useForm<{ password: string }>({
 		mode: 'onBlur',
-		defaultValues: { password: '' },
+		defaultValues: DEFAULT_VALUES.EDIT_PASSWORD,
 	});
 
 	const formRef = useRef<HTMLFormElement>(null);

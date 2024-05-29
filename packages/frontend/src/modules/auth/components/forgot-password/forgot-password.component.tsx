@@ -5,6 +5,7 @@ import { Button } from '@blueprintjs/core';
 import { buttonWrapper } from './forgot-password.styles';
 import authService from '~modules/auth/service/auth.service';
 import { useCommonStore } from '~store/common-store/common.store';
+import { DEFAULT_VALUES } from '~modules/auth/constants/defaultValues';
 
 type ForgotPasswordFormValues = {
 	email: string;
@@ -15,7 +16,10 @@ export const ForgotPassword = (): React.ReactNode => {
 		register,
 		handleSubmit,
 		formState: { isValid, errors },
-	} = useForm({ defaultValues: { email: '' }, mode: 'onBlur' });
+	} = useForm({
+		defaultValues: DEFAULT_VALUES.FORGOT_PASSWORD,
+		mode: 'onBlur',
+	});
 
 	const toggleForgetModal = useCommonStore(
 		(state) => state.toggleForgetModal,

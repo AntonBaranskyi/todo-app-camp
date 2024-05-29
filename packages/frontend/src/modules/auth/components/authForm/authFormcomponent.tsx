@@ -13,6 +13,7 @@ import { useForm } from 'react-hook-form';
 import { IUserLogin } from '~store/auth-store/auth.store.types';
 import { useAuthStore } from '~store/auth-store/auth.store';
 import { useCommonStore } from '~store/common-store/common.store';
+import { DEFAULT_VALUES } from '~modules/auth/constants/defaultValues';
 
 type Props = {
 	type: AUTH_TYPE;
@@ -32,7 +33,10 @@ export const AuthForm: React.FC<Props> = ({ type }): React.ReactNode => {
 		register,
 		handleSubmit,
 		formState: { errors, isValid },
-	} = useForm({ defaultValues: { password: '', email: '' }, mode: 'onBlur' });
+	} = useForm({
+		defaultValues: DEFAULT_VALUES.REGISTER_LOGIN,
+		mode: 'onBlur',
+	});
 
 	const onHandleSubmit = (data: IUserLogin): void => {
 		if (isLogin) {

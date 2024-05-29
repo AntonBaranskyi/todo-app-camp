@@ -5,6 +5,7 @@ import { EditForm } from '../edit-form';
 import { Button } from '@blueprintjs/core';
 import { resetButton } from './reset-password.styles';
 import { useAuthStore } from '~store/auth-store/auth.store';
+import { DEFAULT_VALUES } from '~modules/auth/constants/defaultValues';
 
 export const ResetPassword = (): React.ReactNode => {
 	const { userToken } = useParams();
@@ -17,7 +18,7 @@ export const ResetPassword = (): React.ReactNode => {
 		formState: { errors, isValid },
 	} = useForm<{ password: string }>({
 		mode: 'onBlur',
-		defaultValues: { password: '' },
+		defaultValues: DEFAULT_VALUES.EDIT_PASSWORD,
 	});
 
 	const onHandleSubmit = (data: { password: string }): void => {
