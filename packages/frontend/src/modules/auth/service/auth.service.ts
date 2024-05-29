@@ -1,4 +1,3 @@
-import { toaster } from '~shared/components/toast/toast.component';
 import HttpSerivce from '~shared/services/http.service';
 import { IUser, IUserLogin } from '~store/auth-store/auth.store.types';
 
@@ -13,8 +12,6 @@ class AuthService extends HttpSerivce {
 			data,
 		});
 
-		toaster.show({ message: 'You logged in successfully ' });
-
 		return response.data;
 	}
 
@@ -23,8 +20,6 @@ class AuthService extends HttpSerivce {
 			url: 'user/register',
 			data,
 		});
-
-		toaster.show({ message: 'You registred successfully ' });
 
 		return response.data;
 	}
@@ -40,8 +35,6 @@ class AuthService extends HttpSerivce {
 			url: 'user/update-password',
 			data,
 		});
-
-		toaster.show({ message: 'You changed your password successfully ' });
 
 		return response.data;
 	}
