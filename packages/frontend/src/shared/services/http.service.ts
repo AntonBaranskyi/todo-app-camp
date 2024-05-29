@@ -20,7 +20,7 @@ class HttpSerivce {
 
 	private populateTokenToHeaderConfig(): object {
 		return {
-			Authorization: localStorage.getItem('token'),
+			Authorization: `Bearer ${localStorage.getItem('token')}`,
 		};
 	}
 

@@ -4,21 +4,25 @@ import { Switch } from '@blueprintjs/core';
 import { switchWrapper } from './todo-switch-form.styles';
 
 type CompletedSwitchProps = {
-	name: 'title' | 'description' | 'completed';
+	name: 'title' | 'description' | 'completed' | 'isPrivate';
 	control: Control<{
 		title: string;
 		description: string;
 		completed: boolean;
+
+		isPrivate: boolean;
 	}>;
+	label: string;
 };
 
 const CompletedSwitch: React.FC<CompletedSwitchProps> = ({
 	name,
 	control,
+	label,
 }): React.ReactNode => {
 	return (
 		<div className={switchWrapper}>
-			<p>Is completed</p>
+			<p>{label}</p>
 			<Controller
 				name={name}
 				control={control}

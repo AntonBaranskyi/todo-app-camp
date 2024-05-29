@@ -3,6 +3,7 @@ import HttpError from '@/helpers/HttpError';
 import UserServise from '@/services/user.service';
 import { EMAIL } from '@/types/emailEnum';
 import { Request, Response } from 'express';
+import { JwtPayload } from 'jsonwebtoken';
 
 export class UserController {
 	constructor(private userServise: UserServise) {}
@@ -33,7 +34,7 @@ export class UserController {
 	async loginUser(req: Request, resp: Response): Promise<void> {
 		const { password, email } = req.body;
 
-		const user = await this.userServise.findOneUser(email);
+		const user = await this.userServise.findOneUser({ email });
 
 		const isValidPassword = await this.userServise.checkPassword({
 			password,
@@ -89,9 +90,15 @@ export class UserController {
 	}
 
 	async verifyEmail(req: Request, resp: Response): Promise<void> {
-		const { email } = req.body;
+		const { token } = req.query;
 
-		const user = await this.userServise.findOneUser({ email });
+		const decodedToken = await this.userServise.verifyToken(
+			token as string,
+		);
+
+		const user = await this.userServise.findOneUser({
+			email: decodedToken.email,
+		});
 
 		if (!user) {
 			throw HttpError(404, 'User with this email does not exist');
@@ -102,7 +109,7 @@ export class UserController {
 			data: { ...user, isVerified: true },
 		});
 
-		resp.status(200).redirect(process.env.CLIENT_URL as string);
+		resp.status(200).json({ message: 'User Verified' });
 	}
 }
 

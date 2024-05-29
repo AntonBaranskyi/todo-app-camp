@@ -43,20 +43,8 @@
 			"~/*": [
 				"src/*"
 			],
-			"~todos/*": [
-				"src/modules/todos/*"
-			],
-			"~auth/*": [
-				"src/modules/auth/*"
-			],
-			"~todo-store/*": [
-				"src/store/todo-store/*"
-			],
-			"~layouts/*": [
-				"src/shared/layouts/*"
-			],
-			"~common-store/*": [
-				"src/store/common-store/*"
+			"~popover-body/*": [
+				"src/shared/popover-body/*"
 			]
 		}
 	},

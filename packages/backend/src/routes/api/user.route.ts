@@ -46,7 +46,7 @@ router.patch(
 );
 
 router.get(
-	'activate-account',
+	'/activate-account',
 	tryCatch(userController.verifyEmail.bind(userController)),
 );
 
