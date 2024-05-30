@@ -19,3 +19,8 @@ export const todoCheckedWrapper = css`
 export const buttonStyles = css`
 	width: 200px;
 `;
+
+export const loadingWrapper = css`
+	display: flex;
+	justify-content: center;
+`;

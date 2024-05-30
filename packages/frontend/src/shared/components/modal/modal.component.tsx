@@ -2,6 +2,7 @@ import { Dialog } from '@blueprintjs/core';
 import React from 'react';
 import { useCommonStore } from '~store/common-store/common.store';
 import { modalStyles } from './modal.styles';
+import { useTodoStore } from '~store/todo-store/todo.store';
 
 type Props = {
 	children: React.ReactNode;
@@ -20,12 +21,15 @@ export const Modal: React.FC<Props> = ({
 		toggleVerificateUser,
 	} = useCommonStore((state) => state);
 
+	const clearEditingTodo = useTodoStore((state) => state.clearEditingTodo);
+
 	const handleCloseModal = (): void => {
 		toggleEdditing(false);
 		toggleModalOpen(false);
 		toggleForgetModal({ bool: false, email: '' });
 		toggleEditUser(false);
 		toggleVerificateUser(false);
+		clearEditingTodo();
 	};
 
 	return (

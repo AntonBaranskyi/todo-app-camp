@@ -7,9 +7,12 @@ export const useTodoStore = create<ITodosState>((set) => ({
 	isLoading: false,
 	addTodoLoading: false,
 	editingTodo: null,
+	currentTodo: null,
 
-	getAllTodo: async (): Promise<void> => {
-		const todos = await todoService.getTodos();
+	currentTodoLoading: false,
+
+	getAllTodo: async ({ search, sort, status }): Promise<void> => {
+		const todos = await todoService.getTodos({ search, sort, status });
 		set({ todos: todos.data });
 	},
 
@@ -40,6 +43,15 @@ export const useTodoStore = create<ITodosState>((set) => ({
 		}));
 
 		set({ addTodoLoading: false });
+	},
+
+	findOneTodo: async (id): Promise<void> => {
+		set({ currentTodoLoading: true });
+		const oneTodo = await todoService.findTodo(id);
+
+		set({ currentTodo: oneTodo.data });
+
+		set({ currentTodoLoading: false });
 	},
 
 	setEditingTodo: (todo: ITodo): void => {

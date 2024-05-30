@@ -8,13 +8,15 @@ export const useAuthStore = create<IAuthState>((set) => ({
 
 	user: null,
 
+	userLoading: false,
+
 	signUpOneUser: async (data: IUserLogin): Promise<void> => {
 		try {
 			const user = await authService.signUpUser(data);
 
 			localStorage.setItem('token', user.token);
 
-			toaster.show({ message: 'Succesfully registred' });
+			// toaster.show({ message: 'Succesfully registred' });
 
 			set({ user });
 		} catch (error) {
@@ -60,6 +62,31 @@ export const useAuthStore = create<IAuthState>((set) => ({
 			toaster.show({ message: 'Password updated!!' });
 		} catch (error) {
 			toaster.show({ message: 'User password updation failed' });
+		}
+	},
+
+	forgotPassword: async (email: string): Promise<void> => {
+		try {
+			await authService.forgotPassword({ email });
+		} catch (error) {
+			toaster.show({ message: 'Cannot find user with this email' });
+		}
+	},
+
+	checkUser: async (): Promise<void> => {
+		try {
+			set({ userLoading: true });
+			const user = await authService.checkAuth();
+
+			set({ isAuth: true });
+
+			console.log(user);
+
+			set({ user: user });
+			set({ userLoading: false });
+		} catch (error) {
+			localStorage.removeItem('token');
+			set({ userLoading: false });
 		}
 	},
 }));

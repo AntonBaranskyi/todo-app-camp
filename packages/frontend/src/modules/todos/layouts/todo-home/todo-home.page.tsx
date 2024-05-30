@@ -16,12 +16,17 @@ import { TodoSlider } from '~modules/todos/components/todo-slider';
 import { TodoList } from '~modules/todos/components/todos-list';
 import { useAuthStore } from '~store/auth-store/auth.store';
 import { EditUser } from '~modules/auth/components/edit-user';
+import { useFilterTodods } from '~modules/todos/hooks/useFilterTodods';
 
 export const TodoHomePage = (): React.ReactNode => {
 	const { todos, getAllTodo } = useTodoStore((state) => state);
 	const { addTodoModalOpen, toggleModalOpen, editUserModal } = useCommonStore(
 		(state) => state,
 	);
+
+
+	const { setSearchWith, search, sort, status } = useFilterTodods();
+
 	const isAuth = useAuthStore((state) => state.isAuth);
 
 	const isTablet = useMediaQuery({
@@ -32,9 +37,13 @@ export const TodoHomePage = (): React.ReactNode => {
 		query: `(min-width:${theme.breakpoints.smallDekstop})`,
 	});
 
+	const handleSearchLink = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchWith({ search: event.target.value || null });
+	};
+
 	useEffect(() => {
-		getAllTodo();
-	}, []);
+		getAllTodo({ search, sort, status });
+	}, [search, sort, status]);
 
 	return (
 		<>
@@ -46,7 +55,11 @@ export const TodoHomePage = (): React.ReactNode => {
 					{isAuth && (
 						<Button text="Create Todo" onClick={toggleModalOpen} />
 					)}
-					<Input type="search" placeholder="Find a todo" />
+					<Input
+						type="search"
+						placeholder="Find a todo"
+						onChange={handleSearchLink}
+					/>
 				</div>
 
 				{isDekstop && <TodoTable todos={todos} />}

@@ -23,6 +23,8 @@ export const CreateModal = (): React.ReactNode => {
 	const [isFormValid, setIsFormValid] = useState(false);
 	const formRef = useRef<HTMLFormElement>(null);
 
+	console.log(user);
+
 	const handleFormSubmit = (data: ITodo): void => {
 		const { title, completed, description, isPrivate } = data;
 

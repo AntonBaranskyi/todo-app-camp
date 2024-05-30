@@ -1,15 +1,27 @@
 import { AxiosResponse } from 'axios';
 import HttpSerivce from '~shared/services/http.service';
 import { ITodo } from '~store/todo-store/todo.store.types';
+import { IFilterParams } from '../types/todo-filter.types';
 
 class TodoService extends HttpSerivce {
 	constructor() {
 		super();
 	}
 
-	getTodos(): Promise<AxiosResponse<ITodo[]>> {
+	getTodos({
+		sort,
+		search,
+		status,
+	}: IFilterParams): Promise<AxiosResponse<ITodo[]>> {
+		const params = {};
+
+		if (sort) params.sort = sort;
+		if (search) params.search = search;
+		if (status) params.status = status;
+
 		const data = this.get({
 			url: 'todos/all',
+			params,
 		});
 
 		return data;
@@ -43,6 +55,12 @@ class TodoService extends HttpSerivce {
 			url: 'todos/create',
 			data,
 		});
+
+		return response;
+	}
+
+	findTodo(id: number): Promise<AxiosResponse<ITodo>> {
+		const response = this.get({ url: `todos/${id}` });
 
 		return response;
 	}

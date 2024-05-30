@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCommonStore } from '~store/common-store/common.store';
 import { useTodoStore } from '~store/todo-store/todo.store';
 import { ITodo } from '~store/todo-store/todo.store.types';
@@ -8,15 +8,14 @@ type TodoActions = {
 	handleChangeStatus: (todo: ITodo) => void;
 	handleEditOpen: (todo: ITodo) => void;
 	handleNavigate: (id: number) => void;
-	currentTodo: ITodo;
 };
 
 export const useTodoActions = (): TodoActions => {
 	const navigate = useNavigate();
-	const { id } = useParams();
 
-	const { deleteOneTodo, updateOneTodo, setEditingTodo, todos } =
-		useTodoStore((state) => state);
+	const { deleteOneTodo, updateOneTodo, setEditingTodo } = useTodoStore(
+		(state) => state,
+	);
 
 	const { toggleModalOpen, toggleEdditing } = useCommonStore(
 		(state) => state,
@@ -41,13 +40,10 @@ export const useTodoActions = (): TodoActions => {
 		navigate(`todo/${id}`);
 	};
 
-	const currentTodo = todos.find((todo) => todo.id === +id);
-
 	return {
 		handleDeleteTodo,
 		handleChangeStatus,
 		handleEditOpen,
 		handleNavigate,
-		currentTodo,
 	};
 };

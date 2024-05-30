@@ -38,6 +38,11 @@ export const todosPatchValidation = [
 
 	body('description')
 		.optional()
-		.isLength({ min: 4 })
+		.custom((value, { req }) => {
+			if (value && typeof value === 'string') {
+				return value.length >= 4;
+			}
+			return true;
+		})
 		.withMessage('description must be at least 4 characters long'),
 ];
