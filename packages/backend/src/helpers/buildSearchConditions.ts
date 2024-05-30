@@ -9,8 +9,8 @@ export const buildSearchConditions = ({
 	search: string | undefined;
 	status: STATUS | undefined;
 }) => {
-	const searchFilter = search ? { contains: search } : null;
-	const baseConditions = [
+	const searchFilter = search ? { contains: search } : undefined;
+	const startCondition = [
 		{
 			isPrivate: false,
 			title: searchFilter,
@@ -18,7 +18,7 @@ export const buildSearchConditions = ({
 	];
 
 	if (userId) {
-		baseConditions.push({
+		startCondition.push({
 			userId,
 			isPrivate: true,
 			title: searchFilter,
@@ -26,7 +26,7 @@ export const buildSearchConditions = ({
 	}
 
 	const statusConditions: Record<string, object> = {
-		[STATUS.COMPLETED]: baseConditions.map((condition) => ({
+		[STATUS.COMPLETED]: startCondition.map((condition) => ({
 			...condition,
 			completed: true,
 		})),
@@ -46,10 +46,10 @@ export const buildSearchConditions = ({
 				title: searchFilter,
 			},
 		],
-		[STATUS.ALL]: baseConditions,
+		[STATUS.ALL]: startCondition,
 	};
 
 	return {
-		OR: status ? statusConditions[status] : baseConditions,
+		OR: status ? statusConditions[status] : startCondition,
 	};
 };
