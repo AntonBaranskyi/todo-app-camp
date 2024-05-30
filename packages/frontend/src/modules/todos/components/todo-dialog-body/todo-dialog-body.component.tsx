@@ -27,13 +27,15 @@ export const TodoDialogBody: React.FC<Props> = ({
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
-			title: editingTodo?.title,
-			description: editingTodo?.description,
+			title: editingTodo?.title || '',
+			description: editingTodo?.description || '',
 			completed: editingTodo?.completed || false,
 			isPrivate: editingTodo?.isPrivate || false,
 		},
 		mode: 'onBlur',
 	});
+
+	console.log(editingTodo);
 
 	const onHandleSubmit = (data: ITodo): void => {
 		onSubmit(data);

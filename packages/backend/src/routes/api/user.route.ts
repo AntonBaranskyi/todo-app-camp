@@ -50,4 +50,10 @@ router.get(
 	tryCatch(userController.verifyEmail.bind(userController)),
 );
 
+router.get(
+	'/check-auth',
+	authenticateJwt,
+	tryCatch(userController.checkMe.bind(userController)),
+);
+
 export default router;

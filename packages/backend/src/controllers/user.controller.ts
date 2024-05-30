@@ -3,7 +3,6 @@ import HttpError from '@/helpers/HttpError';
 import UserServise from '@/services/user.service';
 import { EMAIL } from '@/types/emailEnum';
 import { Request, Response } from 'express';
-import { JwtPayload } from 'jsonwebtoken';
 
 export class UserController {
 	constructor(private userServise: UserServise) {}
@@ -110,6 +109,10 @@ export class UserController {
 		});
 
 		resp.status(200).json({ message: 'User Verified' });
+	}
+
+	async checkMe(req: Request, resp: Response): Promise<void> {
+		resp.status(200).send(req.user);
 	}
 }
 

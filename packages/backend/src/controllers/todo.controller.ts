@@ -1,19 +1,23 @@
 import { Response, Request } from 'express';
 import TodoService from '@/services/todo.service';
 import { TodoType } from '@/types/todos.type';
+import { STATUS } from '@/types/status.enum';
+import { SORT } from '@/types/sortOder.enum';
 
 export class TodoController {
 	constructor(private todoService: TodoService) {}
 
 	async getAllTodo(req: Request, res: Response): Promise<void> {
 		const userId = req?.body?.user?.id ?? null;
-		const { search, order, status } = req.query;
+		const search = (req.query.search as string) || '';
+		const status = (req.query.status as STATUS) || STATUS.ALL;
+		const sortOrder = (req.query.sortOrder as SORT) || SORT.ASC;
 
 		const todos = await this.todoService.findAll({
 			userId,
 			search,
 			status,
-			sortOrder: order,
+			sortOrder,
 		});
 		res.send(todos);
 	}
@@ -49,6 +53,14 @@ export class TodoController {
 		);
 
 		resp.status(200).json(updatedTodo);
+	}
+
+	async getTodo(req: Request, resp: Response): Promise<void> {
+		const { id } = req.params;
+
+		const todo = await this.todoService.findOne(+id);
+
+		resp.status(200).send(todo);
 	}
 }
 

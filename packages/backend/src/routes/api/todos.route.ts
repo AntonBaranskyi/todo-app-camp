@@ -41,4 +41,11 @@ todosRouter.patch(
 	tryCatch(todoController.updateTodo.bind(todoController)),
 );
 
+todosRouter.get(
+	'/:id',
+	authenticateJwt,
+	isExist(MODELS.TODOS),
+	tryCatch(todoController.getTodo.bind(todoController)),
+);
+
 export default todosRouter;

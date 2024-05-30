@@ -44,6 +44,12 @@ class AuthService extends HttpSerivce {
 
 		return response.data;
 	}
+
+	async checkAuth(): Promise<void> {
+		const response = await this.get({ url: 'user/check-auth' });
+
+		return response.data;
+	}
 }
 
 const authService = new AuthService();

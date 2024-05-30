@@ -10,3 +10,8 @@ export const todoFilterBtn = css`
 	border: 1px solid ${theme.colors.dimGray};
 	cursor: pointer;
 `;
+
+export const activeFilterBtn = css`
+	background-color: ${theme.colors.blackCoral};
+	color: ${theme.colors.white} !important;
+`;

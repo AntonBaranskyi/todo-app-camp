@@ -9,13 +9,10 @@ import { TodoDetailPage } from '~modules/todos/layouts/todo-detail';
 import { TodoHomePage } from '~modules/todos/layouts/todo-home';
 import { ROUTER_KEYS } from '~shared/keys';
 import { AUTH_TYPE } from '~shared/types/authEnum';
-import { useAuthStore } from '~store/auth-store/auth.store';
 import { PrivateRoute } from './routes'; // Ensure correct import path
 import { VerificateUser } from '~modules/auth/components/verificate-user';
 
 const Router: React.FunctionComponent = () => {
-	const isAuth = useAuthStore((state) => state.isAuth);
-
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -24,7 +21,7 @@ const Router: React.FunctionComponent = () => {
 					<Route
 						path={ROUTER_KEYS.TODO_DETAILS}
 						element={
-							<PrivateRoute isAuthenticated={isAuth}>
+							<PrivateRoute>
 								<TodoDetailPage />
 							</PrivateRoute>
 						}

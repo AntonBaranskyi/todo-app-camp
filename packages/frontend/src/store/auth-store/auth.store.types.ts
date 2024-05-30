@@ -8,6 +8,9 @@ export interface IAuthState {
 	logoutUser: () => void;
 	verifyUser: (token: string) => void;
 	updatePassword: (password: string) => void;
+	checkUser: () => void;
+	forgotPassword: () => void;
+	userLoading: boolean;
 }
 
 export interface IUserLogin {

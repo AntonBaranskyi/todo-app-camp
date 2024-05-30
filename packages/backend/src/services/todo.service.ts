@@ -1,6 +1,7 @@
 import { prisma } from '@/app';
 import { buildSearchConditions } from '@/helpers/buildSearchConditions';
 import { IFindAll } from '@/types/service.types';
+import { STATUS } from '@/types/status.enum';
 import { TodoType } from '@/types/todos.type';
 
 export default class TodoService {
@@ -10,16 +11,15 @@ export default class TodoService {
 		status,
 		sortOrder,
 	}: IFindAll): Promise<TodoType[]> {
-		const { where, orderBy } = buildSearchConditions({
+		const whereCondition = buildSearchConditions({
 			userId,
 			search,
 			status,
-			sortOrder,
 		});
 
 		const todos = await prisma.todos.findMany({
-			where,
-			orderBy,
+			where: whereCondition,
+			orderBy: { title: sortOrder },
 		});
 
 		return todos;
@@ -58,5 +58,13 @@ export default class TodoService {
 		});
 
 		return updatedUser;
+	}
+
+	async findOne(id: number): Promise<TodoType> {
+		const todo = (await prisma.todos.findUnique({
+			where: { id },
+		})) as TodoType;
+
+		return todo;
 	}
 }
