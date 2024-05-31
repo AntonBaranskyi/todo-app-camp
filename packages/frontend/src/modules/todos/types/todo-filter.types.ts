@@ -14,4 +14,5 @@ export interface IFilterParams {
 	sort: SORT;
 	search: string;
 	status: STATUS;
+	page: number;
 }

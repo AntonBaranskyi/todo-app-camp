@@ -1,7 +1,6 @@
 import { prisma } from '@/app';
 import { buildSearchConditions } from '@/helpers/buildSearchConditions';
 import { IFindAll } from '@/types/service.types';
-import { STATUS } from '@/types/status.enum';
 import { TodoType } from '@/types/todos.type';
 
 export default class TodoService {
@@ -10,19 +9,29 @@ export default class TodoService {
 		search,
 		status,
 		sortOrder,
-	}: IFindAll): Promise<TodoType[]> {
+		limit,
+		page,
+	}: IFindAll): Promise<{ todos: TodoType[]; totalItems: number }> {
 		const whereCondition = buildSearchConditions({
 			userId,
 			search,
 			status,
 		});
 
+		const totalRecords = await prisma.todos.count({
+			where: whereCondition,
+		});
+
 		const todos = await prisma.todos.findMany({
 			where: whereCondition,
 			orderBy: { title: sortOrder },
+			skip: (page - 1) * limit,
+			take: limit,
 		});
 
-		return todos;
+		console.log(totalRecords);
+
+		return { todos, totalItems: totalRecords };
 	}
 
 	async createOne({

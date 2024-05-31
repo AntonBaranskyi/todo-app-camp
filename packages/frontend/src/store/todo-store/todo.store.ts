@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { ITodo, ITodosState } from './todo.store.types';
 import todoService from '~modules/todos/services/todo.service';
+import { PAGINATION } from '~modules/todos/types/todo-pagination.enum';
 
 export const useTodoStore = create<ITodosState>((set) => ({
 	todos: [],
@@ -8,12 +9,26 @@ export const useTodoStore = create<ITodosState>((set) => ({
 	addTodoLoading: false,
 	editingTodo: null,
 	currentTodo: null,
+	totalTodos: 0,
+	paginationType: PAGINATION.DESKTOP,
 
 	currentTodoLoading: false,
 
-	getAllTodo: async ({ search, sort, status }): Promise<void> => {
-		const todos = await todoService.getTodos({ search, sort, status });
-		set({ todos: todos.data });
+	getAllTodo: async ({ search, sort, status, page }): Promise<void> => {
+		const todos = await todoService.getTodos({
+			search,
+			sort,
+			status,
+			page,
+		});
+		set((state) => ({
+			todos:
+				state.paginationType === PAGINATION.DESKTOP || page === 1
+					? todos.data.todos
+					: [...state.todos, ...todos.data.todos],
+		}));
+
+		set({ totalTodos: todos.data.totalItems });
 	},
 
 	deleteOneTodo: async (id: number): Promise<void> => {
@@ -60,5 +75,8 @@ export const useTodoStore = create<ITodosState>((set) => ({
 
 	clearEditingTodo: (): void => {
 		set({ editingTodo: null });
+	},
+	onChangePaginationType: (type: PAGINATION): void => {
+		set({ paginationType: type });
 	},
 }));

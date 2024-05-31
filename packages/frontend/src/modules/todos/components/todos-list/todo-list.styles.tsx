@@ -6,5 +6,9 @@ export const todoListStyles = css`
 	flex-direction: column;
 	align-items: center;
 
-	gap: ${theme.spaces.xms};
+	gap: ${theme.spaces.xxs};
+`;
+
+export const todoListEndTitle = css`
+	text-align: center;
 `;
