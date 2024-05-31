@@ -6,4 +6,6 @@ export interface IFindAll {
 	search: string;
 	status: STATUS;
 	sortOrder: SORT;
+	limit: number;
+	page: number;
 }

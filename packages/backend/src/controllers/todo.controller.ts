@@ -12,14 +12,18 @@ export class TodoController {
 		const search = (req.query.search as string) || '';
 		const status = (req.query.status as STATUS) || STATUS.ALL;
 		const sortOrder = (req.query.sortOrder as SORT) || SORT.ASC;
+		const limit = +(req.query.limit as string) || 4;
+		const page = +(req.query.page as string) || 1;
 
-		const todos = await this.todoService.findAll({
+		const { todos, totalItems } = await this.todoService.findAll({
 			userId,
 			search,
 			status,
 			sortOrder,
+			limit: Number(limit),
+			page: Number(page),
 		});
-		res.send(todos);
+		res.send({ todos, totalItems });
 	}
 
 	async createTodo(req: Request, resp: Response): Promise<void> {

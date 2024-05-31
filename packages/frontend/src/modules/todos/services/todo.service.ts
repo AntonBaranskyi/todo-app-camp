@@ -12,12 +12,16 @@ class TodoService extends HttpSerivce {
 		sort,
 		search,
 		status,
-	}: IFilterParams): Promise<AxiosResponse<ITodo[]>> {
+		page,
+	}: IFilterParams): Promise<
+		AxiosResponse<{ todos: ITodo[]; totalItems: number }>
+	> {
 		const params = {};
 
 		if (sort) params.sort = sort;
 		if (search) params.search = search;
 		if (status) params.status = status;
+		if (page) params.page = page;
 
 		const data = this.get({
 			url: 'todos/all',
