@@ -14,10 +14,9 @@ type Props = {
 export const TodoList: React.FC<Props> = ({ todos }): React.ReactNode => {
 	const totalTodos = useTodoStore((state) => state.totalTodos);
 
-	const totalPage = Math.ceil(totalTodos / 4);
+	const { onHandleSliderReachEnd, page, limit } = useFilterTodods();
 
-	const { onHandleSliderReachEnd, page } = useFilterTodods();
-
+	const totalPage = Math.ceil(totalTodos / limit);
 	return (
 		<div className={todoListStyles}>
 			<InfiniteScroll

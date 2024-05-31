@@ -9,6 +9,7 @@ interface IHook {
 	status: STATUS;
 	sort: SORT;
 	page: number;
+	limit: number;
 	setSearchWith: (params: ISearchParams) => void;
 	handlePaginateChange: (selected: { selected: number }) => void;
 	onHandleSliderReachEnd: () => void;
@@ -21,6 +22,7 @@ export const useFilterTodods = (): IHook => {
 	const search = searchParams.get('search') || '';
 	const status = searchParams.get('status') as STATUS;
 	const sort = searchParams.get('sort') as SORT;
+	const limit = (searchParams.get('limit') as string) || '4';
 	const page = (searchParams.get('page') as string) || '1';
 
 	const setSearchWith = (params: ISearchParams): void => {
@@ -48,6 +50,7 @@ export const useFilterTodods = (): IHook => {
 		sort,
 		setSearchWith,
 		page: +page,
+		limit: +limit,
 		handlePaginateChange,
 		onHandleSliderReachEnd,
 	};
